@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+  <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>  
+</head>
+<body>
+<div class="card" >
+  
+  <h1 class="card-header">Phone Book App</h1>
+  <div>
+  <div class="card-body">
+    <label for="seacrh" class="col-sm-2 control-label">Contacts </label>
+
+    <button type="button" class="btn btn-info " (click)="openModal()"> + Add Contact</button>
+    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+         <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                     <div class="modal-header">
+                           <h4 class="modal-title">New Contact</h4>
+                          
+                         </div>
+                <div class="modal-body">
+                  <input type="text"  name="newfname" ng-model ="newcontactfname" class="form-control" placeholder="First Name" [(ngModel)]=myContact.newcontactfname><br>
+                  <input type="text"  name="newlname" ng-model ="newcontactlname" class="form-control" placeholder="Last Name" [(ngModel)]=myContact.newcontactlname><br>
+                  <input type="number"  name="newnum" ng-model ="newcontactnum" class="form-control" placeholder="Contact Number" [(ngModel)]=myContact.newcontactnum>
+                         </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-info" (click)="add()" >Create </button>
+                           <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+                         </div>
+            </div>
+             </div>
+ </div>
+
+
+
+
+    <!-- <a href="#" class="btn btn-primary">+ Add Contact</a> -->
+    </div><br>
+    <div class="col-sm-5">
+       <form (ngSubmit)="search()">
+        <input type="text"  name="search" id="search-text" aria-describedby="search-text"  [(ngModel)]="searchText" class="form-control" placeholder="Search for contacts by last name....">
+      
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        </form>                                          
+    </div><br><br>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <tbody>
+         <tr ng-repeat="myContact in allContacts | limitTo:rowLimit| orderBy: 'newfname' " *ngFor="let myContact of allContacts | appFilter:searchText">
+          <td>{{myContact.Fname}}  {{myContact.Lname}}<br>{{myContact.Phone}}</td>
+          
+        <td><a href="#" (click)="removeContact()"><span class="glyphicon glyphicon-trash"></span>&nbsp;</a></td>
+                    </tr>
+                  </tbody>
+                
+        </table>    
+   </div> 
+</div>
+</div>
+</body>  
+  
